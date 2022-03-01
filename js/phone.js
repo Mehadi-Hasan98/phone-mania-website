@@ -13,12 +13,13 @@ const searchPhone = () => {
 
 const displaySearchResult = data => {
       const searchResult = document.getElementById('search-result');
+      const first20Data = data.slice(0, 20);
       searchResult.textContent = '';
     // if(phones.length == 0){
     //     // show no result found
     // }
-   const totalPhone = data.slice(0, 20); 
-     data.forEach(phone => {
+    
+        first20Data.forEach(phone => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
