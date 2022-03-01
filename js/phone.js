@@ -13,22 +13,23 @@ const searchPhone = () => {
 
 const displaySearchResult = data => {
       const searchResult = document.getElementById('search-result');
-      const first20Data = data.slice(0, 20);
+      
+    //   showing first 18 phones using slice
+      const first18Data = data.slice(0, 18);
       searchResult.textContent = '';
-    // if(phones.length == 0){
-    //     // show no result found
-    // }
     
-        first20Data.forEach(phone => {
+        // using forEach loop
+        first18Data.forEach(phone => {
         const div = document.createElement('div');
         div.classList.add('col');
+        // all phone results
         div.innerHTML = `
         <div class="card align-items-center">
             <img src="${phone.image}" class="card-img-top w-50" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Phone Name: ${phone.phone_name}</h5>
                 <h6 class="card-title">Brand Name: ${phone.brand}</h6>
-                <button class="bg-primary text-white border-0 rounded ps-4 pe-4" onclick="loadPhoneDetail('${phone.slug}')">Details</button>
+                <button class="bg-primary text-white border-0 rounded ps-4 pe-4" onclick="loadPhoneDetail('${phone.slug}')">More details</button>
             </div>
         </div>
         `;
@@ -42,30 +43,30 @@ const loadPhoneDetail = phoneId => {
     .then(res => res.json())
     .then(data => displayPhoneDetail(data.data));
 }
-
+// single phone details
 const displayPhoneDetail = phone => {
-    // console.log(phone);
     const phoneDetails = document.getElementById('phone-details');
+    phoneDetails.textContent = '';
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-    <img src="${phone.image}" class="card-img-top w-50 mb-4 mx-auto" alt="...">
+    <img width="400px" height="350px" src="${phone.image}" class="card-img-top w-50 mb-4 mx-auto" alt="...">
     <div class="card-body">
         <h4 class="card-title">Phone Name: ${phone.name}</h4>
         <h5 class="card-title">Brand Name: ${phone.brand}</h5>
-        <p class="card-text"><b>Release Date:</b> ${phone.releaseDate}.</p>
+        <p class="card-text"><b>Release Date:</b> ${phone?.releaseDate??"No Release Date Found"}.</p>
         <h5 class="card-title fw-bold">Main Features</h5>
         <p class="card-text"><b>Chipset:</b> ${phone.mainFeatures.chipSet}.</p>
         <p class="card-text"><b>Display Size:</b> ${phone.mainFeatures.displaySize}.</p>
         <p class="card-text"><b>Memory:</b> ${phone.mainFeatures.memory}.</p>
         <p class="card-text"><b>Storage:</b> ${phone.mainFeatures.storage}.</p>
         <h5 class="card-title fw-bold">Other Features</h5>
-        <p class="card-text"><b>Bluetooth:</b> ${phone.others?.Bluetooth}.</p>
-        <p class="card-text"><b>GPS:</b> ${phone.others?.GPS}.</p>
-        <p class="card-text"><b>NFC:</b> ${phone.others?.NFC}.</p>
-        <p class="card-text"><b>Radio:</b> ${phone.others?.Radio}.</p>
-        <p class="card-text"><b>USB:</b> ${phone.others?.USB}.</p>
-        <p class="card-text"><b>WLAN:</b> ${phone.others?.WLAN}.</p>
+        <p class="card-text"><b>Bluetooth:</b> ${phone.others?.Bluetooth??"No"}.</p>
+        <p class="card-text"><b>GPS:</b> ${phone.others?.GPS??"No"}.</p>
+        <p class="card-text"><b>NFC:</b> ${phone.others?.NFC??"No"}.</p>
+        <p class="card-text"><b>Radio:</b> ${phone.others?.Radio??"No"}.</p>
+        <p class="card-text"><b>USB:</b> ${phone.others?.USB??"No"}.</p>
+        <p class="card-text"><b>WLAN:</b> ${phone.others?.WLAN??"No"}.</p>
         <p class="card-text"><b>Sensors:</b> ${phone.mainFeatures?.sensors}.</p>
         <a href="#" class="btn btn-primary">See more</a>
     </div>
