@@ -17,17 +17,17 @@ const displaySearchResult = data => {
     // if(phones.length == 0){
     //     // show no result found
     // }
+   const totalPhone = data.slice(0, 20); 
      data.forEach(phone => {
-        // console.log(phone);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div class="card">
-            <img src="${phone.image}" class="card-img-top" alt="...">
+        <div class="card align-items-center">
+            <img src="${phone.image}" class="card-img-top w-50" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Phone Name: ${phone.phone_name}</h5>
-                <h6 class="card-title">Brand: ${phone.brand}</h6>
-                <button onclick="loadPhoneDetail('${phone.slug}')">Details</button>
+                <h6 class="card-title">Brand Name: ${phone.brand}</h6>
+                <button class="bg-primary text-white border-0 rounded ps-4 pe-4" onclick="loadPhoneDetail('${phone.slug}')">Details</button>
             </div>
         </div>
         `;
@@ -43,20 +43,30 @@ const loadPhoneDetail = phoneId => {
 }
 
 const displayPhoneDetail = phone => {
-    console.log(phone);
+    // console.log(phone);
     const phoneDetails = document.getElementById('phone-details');
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-    <img src="${phone.image}" class="card-img-top width=200px" alt="...">
+    <img src="${phone.image}" class="card-img-top w-50 mb-4 mx-auto" alt="...">
     <div class="card-body">
-        <h5 class="card-title">Phone Name: ${phone.name}</h5>
-        <h6 class="card-title">Brand: ${phone.brand}</h6>
-        <p class="card-text">Release Date: ${phone.releaseDate}.</p>
-        <p class="card-text">Chipset: ${phone.mainFeatures.chipSet}.</p>
-        <p class="card-text">Display Size: ${phone.mainFeatures.displaySize}.</p>
-        <p class="card-text">Memory: ${phone.mainFeatures.memory}.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+        <h4 class="card-title">Phone Name: ${phone.name}</h4>
+        <h5 class="card-title">Brand Name: ${phone.brand}</h5>
+        <p class="card-text"><b>Release Date:</b> ${phone.releaseDate}.</p>
+        <h5 class="card-title fw-bold">Main Features</h5>
+        <p class="card-text"><b>Chipset:</b> ${phone.mainFeatures.chipSet}.</p>
+        <p class="card-text"><b>Display Size:</b> ${phone.mainFeatures.displaySize}.</p>
+        <p class="card-text"><b>Memory:</b> ${phone.mainFeatures.memory}.</p>
+        <p class="card-text"><b>Storage:</b> ${phone.mainFeatures.storage}.</p>
+        <h5 class="card-title fw-bold">Other Features</h5>
+        <p class="card-text"><b>Bluetooth:</b> ${phone.others?.Bluetooth}.</p>
+        <p class="card-text"><b>GPS:</b> ${phone.others?.GPS}.</p>
+        <p class="card-text"><b>NFC:</b> ${phone.others?.NFC}.</p>
+        <p class="card-text"><b>Radio:</b> ${phone.others?.Radio}.</p>
+        <p class="card-text"><b>USB:</b> ${phone.others?.USB}.</p>
+        <p class="card-text"><b>WLAN:</b> ${phone.others?.WLAN}.</p>
+        <p class="card-text"><b>Sensors:</b> ${phone.mainFeatures?.sensors}.</p>
+        <a href="#" class="btn btn-primary">See more</a>
     </div>
     `;
     phoneDetails.appendChild(div);
