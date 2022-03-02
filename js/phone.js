@@ -63,7 +63,7 @@ const displayPhoneDetail = phone => {
     <div class="card-body">
         <h4 class="card-title">Phone Name: ${phone.name}</h4>
         <h5 class="card-title">Brand Name: ${phone.brand}</h5>
-        <p class="card-text"><b>Release Date:</b> ${phone.releaseDate?releaseDate:"No release date found"}.</p>
+        <p class="card-text"><b>Release Date:</b> ${phone.releaseDate}.</p>
         <h5 class="card-title fw-bold">Main Features</h5>
         <p class="card-text"><b>Chipset:</b> ${phone.mainFeatures.chipSet}.</p>
         <p class="card-text"><b>Display Size:</b> ${phone.mainFeatures.displaySize}.</p>
