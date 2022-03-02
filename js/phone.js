@@ -1,14 +1,24 @@
-const searchPhone = () => {
+    const searchPhone = () => {
     const searchField = document.getElementById('search-field');
+    const error = document.getElementById('error');
     const searchText = searchField.value;
+    
     // clear data
     searchField.value = '';
-
-    // load data
+    // error handle
+    if(searchText == ''){
+        error.innerText ='please write a phone name';
+        searchField.value = '';   
+    }
+    else{
+        // load data
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     fetch(url)
     .then(res => res.json())
     .then(data => displaySearchResult(data.data));
+    error.innerHTML = '';
+    }   
+    
 }
 
 const displaySearchResult = data => {
@@ -29,15 +39,15 @@ const displaySearchResult = data => {
             <div class="card-body">
                 <h5 class="card-title">Phone Name: ${phone.phone_name}</h5>
                 <h6 class="card-title">Brand Name: ${phone.brand}</h6>
-                <button class="bg-primary text-white border-0 rounded ps-4 pe-4" onclick="loadPhoneDetail('${phone.slug}')">More details</button>
+                <a href="#"><button class="bg-primary text-white border-0 rounded ps-4 pe-4" onclick="loadPhoneDetail('${phone.slug}')">More details</button></a>
             </div>
         </div>
         `;
         searchResult.appendChild(div);
     })
 }
-
-const loadPhoneDetail = phoneId => {
+ 
+  loadPhoneDetail = phoneId => {
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
     fetch(url)
     .then(res => res.json())
@@ -54,7 +64,7 @@ const displayPhoneDetail = phone => {
     <div class="card-body">
         <h4 class="card-title">Phone Name: ${phone.name}</h4>
         <h5 class="card-title">Brand Name: ${phone.brand}</h5>
-        <p class="card-text"><b>Release Date:</b> ${phone?.releaseDate??"No Release Date Found"}.</p>
+        <p class="card-text"><b>Release Date:</b> ${phone.releaseDate??"NO release date found"}.</p>
         <h5 class="card-title fw-bold">Main Features</h5>
         <p class="card-text"><b>Chipset:</b> ${phone.mainFeatures.chipSet}.</p>
         <p class="card-text"><b>Display Size:</b> ${phone.mainFeatures.displaySize}.</p>
@@ -68,7 +78,6 @@ const displayPhoneDetail = phone => {
         <p class="card-text"><b>USB:</b> ${phone.others?.USB??"No"}.</p>
         <p class="card-text"><b>WLAN:</b> ${phone.others?.WLAN??"No"}.</p>
         <p class="card-text"><b>Sensors:</b> ${phone.mainFeatures?.sensors}.</p>
-        <a href="#" class="btn btn-primary">See more</a>
     </div>
     `;
     phoneDetails.appendChild(div);
